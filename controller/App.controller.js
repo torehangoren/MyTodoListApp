@@ -17,6 +17,20 @@ sap.ui.define([
 				isMobile: Device.browser.mobile,
 				filterText: undefined
 			}), "view");
+
+			var oJson = new sap.ui.model.json.JSONModel();
+			
+		$.ajax({                                      
+		      url: 'db.php',                  
+		      async:false,        
+		      success: function(data) {
+				oJson.setData(JSON.parse(data));
+		      },
+		      error: function(err){
+		    	  console.log(err);
+		      }
+		    });
+
 		},
 
 		/**
