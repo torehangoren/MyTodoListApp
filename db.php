@@ -1,27 +1,16 @@
-<?php 
+<?php
 
-$servername = "localhost";
+$servername = "10.35.232.44:3306";
 $username = "k169621_test";
 $password = "1211Fidelya@";
 $dbname = "k169621_test";
 
 // Create connection
-$conn = new mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
-}
+$conn = mysqli_connect($servername, $username, $password);
 
- $sql = "select * from todolist";
- 
- $res = mysqli_query($conn,$sql);
- 
- $result = array();
- 
- while($row = mysqli_fetch_array($res)){
- array_push($result, 
- array('text'=>$row[0]);
- }
- 
- echo json_encode(array('result'=>$result));
+// Check connection
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+echo "KEKE Connected successfully";
 ?>
