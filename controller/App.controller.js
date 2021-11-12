@@ -18,14 +18,20 @@ sap.ui.define([
 				filterText: undefined
 			}), "view");
 
-			var oJson = new sap.ui.model.json.JSONModel();
-			
+			var oJSONModel = new sap.ui.model.json.JSONModel();
+			var aResult = [];
 		$.ajax({                                      
 		      url: 'db.php',                  
 		      async:false,        
 		      success: function(data) {
-				oJson.setData(JSON.parse(data));
-		      },
+				  aResult = JSON.parse(data);
+				  aResult.result.forEach(function(oResult){
+						oResult.COMPLETED = true;
+							});
+				  
+				oJSONModel.setData(aResult);
+				this.getView().setModel(oJSONModel);
+			      }.bind(this),
 		      error: function(err){
 		    	  console.log(err);
 		      }

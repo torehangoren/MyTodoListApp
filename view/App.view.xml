@@ -11,12 +11,12 @@
 						<f:content>
 
 							<List id="todoList"
-								items="{ path: '/todos', events: { change: '.updateItemsLeftCount' } }"
+								items="{ path: '/result', events: { change: '.updateItemsLeftCount' } }"
 								mode="None"
 								growing="true"
 								growingScrollToLoad="true"
 								showNoData="false"
-								showSeparators="None">
+								showSeparators="MultiSelect">
 								<headerToolbar>
 									<OverflowToolbar class="sapUiSizeCompact" visible="{= !${view>/isMobile} }">
 										<ToolbarSpacer />
@@ -40,9 +40,9 @@
 								</infoToolbar>
 								<CustomListItem>
 									<HBox>
-										<CheckBox selected="{completed}"  />
+										<CheckBox selected="{COMPLETED}"  />
 										<VBox justifyContent="Center">
-											<Text text="{title}"/>
+											<Text text="{TEXT}"/>
 										</VBox>
 									</HBox>
 									<customData>
