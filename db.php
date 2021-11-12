@@ -13,7 +13,7 @@ if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
 $sql = "SELECT * FROM todolist";
-$result = mysqli_query($conn, $sql);
+$result = mysqli_query($conn, $sql); 
 
 if(mysqli_num_rows($result) < 0)   // checking if there is any row in the resultset
 {
