@@ -1,7 +1,7 @@
 <?php
-$TEXT = $_POST['TEXT'];
-$COMPLETED = $_POST['COMPLETED'];
-$TOPIC_ID = $_POST['TOPIC_ID'];
+$text1 = isset($_POST["text"]) ? $_POST["text"] : '';
+$completed1 = isset($_POST["completed"]) ? $_POST["completed"] : '';
+$topic_id1 =isset($_POST["topic_id"]) ? $_POST["topic_id"] : '';
 
 
 $servername = "10.35.232.44:3306";
@@ -16,7 +16,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
-$sql = "INSERT INTO todolist (text, completed, topic_id) VALUES ('".$TEXT."', '".$COMPLETED."', '".$TOPIC_ID."')";
+$sql = "INSERT INTO todolist (text, completed, topic_id) VALUES ('$text1', '$completed1', '$topic_id1')";
 
 if (mysqli_query($conn, $sql)) {
   echo "New record created successfully";

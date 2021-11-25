@@ -53,9 +53,10 @@ sap.ui.define([
 		onAddNewTodo: function(oEvent){
 			
 		$.ajax({                                       
-			url: 'addItem.php',                  
+			url: 'addItem.php',     
+			type: "POST",              
 			async:false, 
-			data: { TEXT: oEvent.getParameter("value"), COMPLETED: false, TOPIC_ID: this.cTOPIC_ID },       
+			data: { text: oEvent.getParameter("value"), completed: "0", topic_id: this.cTOPIC_ID },       
 			success: function(data) {
 				this._getItems();
 				}.bind(this),
