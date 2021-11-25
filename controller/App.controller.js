@@ -74,7 +74,7 @@ sap.ui.define([
 							url: 'deleteItem.php',     
 							type: "POST",              
 							async:false, 
-							data: { text: oItem.TEXT, completed: "1", topic_id: oItem.TOPIC_ID },       
+							data: { text: oItem.TEXT, completed: "0", topic_id: oItem.TOPIC_ID },       
 							success: function(data) {
 								this._getItems();
 								}.bind(this),
