@@ -12,8 +12,13 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
-$sql = "INSERT INTO `todolist`(`TEXT`, `COMPLETED`, `TOPIC_ID`) VALUES ('Cay', '0', '1')";
+$sql = "INSERT INTO todolist (text, completed, topic_id) VALUES ('Cay', '0', '1')";
 
+if (mysqli_query($conn, $sql)) {
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
 
 mysqli_close($conn);
 ?>
