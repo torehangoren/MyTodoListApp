@@ -12,8 +12,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
-$sql = "INSERT INTO todolist (TEXT, COMPLETED, TOPIC_ID)
-VALUES ('CHEESE', '0', '1')";
+$sql = "INSERT INTO todolist ('TEXT', 'COMPLETED', 'TOPIC_ID') VALUES ('CHEESE', '0', '1')";
 
 
 mysqli_close($conn);
