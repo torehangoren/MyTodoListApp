@@ -55,7 +55,7 @@ sap.ui.define([
 		$.ajax({                                       
 			url: 'addItem.php',                  
 			async:false, 
-			data: { TEXT: oEvent.getParameter("value"), COMPLETED: false, TOPIC_ID: this.cTOPIC_ID },       
+			// data: { TEXT: oEvent.getParameter("value"), COMPLETED: false, TOPIC_ID: this.cTOPIC_ID },       
 			success: function(data) {
 				this._getItems();
 				}.bind(this),
