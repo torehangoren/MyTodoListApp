@@ -52,7 +52,7 @@ sap.ui.define([
 		},
 		onAddNewTodo: function(oEvent){
 			
-		$.ajax({                                      
+		$.ajax({                                       
 			url: 'addItem.php',                  
 			async:false, 
 			data: { TEXT: oEvent.getParameter("value"), COMPLETED: false, TOPIC_ID: this.cTOPIC_ID },       
