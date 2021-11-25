@@ -64,7 +64,26 @@ sap.ui.define([
 				console.log(err);
 			}
 		  });
-		}
+		}, 
+		clearCompleted: function(oEvent){
+			
+			this.getView().getModel().getData().result.forEach(function(oItem){
+					if(oItem.COMPLETED){
+						$.ajax({                                       
+							url: 'deleteItem.php',     
+							type: "POST",              
+							async:false, 
+							data: { text: oItem.TEXT, completed: "1", topic_id: oItem.TOPIC_ID },       
+							success: function(data) {
+								this._getItems();
+								}.bind(this),
+							error: function(err){
+								console.log(err);
+							}
+						  });
+							}});
+
+			}
 
 
 
