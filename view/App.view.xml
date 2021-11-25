@@ -40,7 +40,7 @@
 								</infoToolbar>
 								<CustomListItem>
 									<HBox>
-										<CheckBox selected="{COMPLETED}"  />
+										<CheckBox selected="{COMPLETED}"  select="onCbCompleted"  />
 										<VBox justifyContent="Center">
 											<Text text="{TEXT}"/>
 										</VBox>

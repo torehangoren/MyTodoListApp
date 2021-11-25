@@ -83,6 +83,14 @@ sap.ui.define([
 						  });
 							}});
 
+			}, 
+			onCbCompleted: function (oEvent){
+				var aSelectedLine = oEvent.getSource().getBindingContext().getObject();
+				
+				this.getView().getModel().getData().result.forEach(function(oItem){
+					if(aSelectedLine.TEXT === oItem.TEXT && aSelectedLine.TOPIC_ID === oItem.TOPIC_ID){
+						oItem === aSelectedLine;
+							}});
 			}
 
 
