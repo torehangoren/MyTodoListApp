@@ -62,7 +62,7 @@ sap.ui.define([
 			error: function(err){
 				console.log(err);
 			}
-		  }.bind(this));
+		  });
 		}
 
 
