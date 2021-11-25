@@ -58,6 +58,7 @@ sap.ui.define([
 			async:false, 
 			data: { text: oEvent.getParameter("value"), completed: "0", topic_id: this.cTOPIC_ID },       
 			success: function(data) {
+				this.getView().byId("addTodoItemInput").setValue("");
 				this._getItems();
 				}.bind(this),
 			error: function(err){
@@ -81,7 +82,7 @@ sap.ui.define([
 								console.log(err);
 							}
 						  });
-							}});
+							}}.bind(this));
 
 			}, 
 			onCbCompleted: function (oEvent){
