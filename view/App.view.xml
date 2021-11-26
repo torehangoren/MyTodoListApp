@@ -11,16 +11,14 @@
 						<f:content>
 
 							<List id="todoList"
-								items="{ path: '/result', events: { change: '.updateItemsLeftCount' } }"
+								items="{ path: 'shown>/' }"
 								mode="None"
 								growing="true"
 								growingScrollToLoad="true"
-								showNoData="false"
-								showSeparators="MultiSelect">
+								showNoData="false">
 								<headerToolbar>
 									<OverflowToolbar class="sapUiSizeCompact" visible="{= !${view>/isMobile} }">
 										<ToolbarSpacer />
-										<SearchField id="searchTodoItemsInput" liveChange="onSearch" width="20rem"/>
 										<SegmentedButton selectedKey="all" selectionChange="onFilter" class="sapMSegmentedButtonNoAutoWidth">
 											<items>
 												<SegmentedButtonItem text="{i18n>LABEL_ALL}" key="all"/>
@@ -28,27 +26,21 @@
 												<SegmentedButtonItem text="{i18n>LABEL_COMPLETED}" key="completed"/>
 											</items>
 										</SegmentedButton>
-										<Button id="clearCompleted" enabled="true" icon="sap-icon://delete" text="{i18n>CLEAR_COMPLETED}" press=".clearCompleted"/>
+										<Button id="clearCompleted" enabled="true" icon="sap-icon://delete" text="{i18n>CLEAR_COMPLETED}" 											press=".clearCompleted"/>
 									</OverflowToolbar>
 								</headerToolbar>
-								<infoToolbar>
-									<OverflowToolbar
-										visible="{= !!${view>/filterText} }"
-										active="false">
-										<Label text="{view>/filterText}" />
-									</OverflowToolbar>
-								</infoToolbar>
 								<CustomListItem>
 									<HBox>
-										<CheckBox selected="{COMPLETED}"  select="onCbCompleted"  />
+										<CheckBox selected="{shown>COMPLETED}"  valueState="{= ${shown>COMPLETED} ? 'Success' : 'None'}" 							select="onCbCompleted" name="{shown>ID}"/>
 										<VBox justifyContent="Center">
-											<Text text="{TEXT}"/>
+											<Text text="{shown>TEXT}"/>
 										</VBox>
 									</HBox>
 									<customData>
-										<core:CustomData key="todo-item-completed" value="{= String(${completed})}" writeToDom="true" />
+										<core:CustomData key="todo-item-completed" value="{= String(${shown>COMPLETED})}" writeToDom="true" />
 									</customData>
 								</CustomListItem>
+				
 							</List>
 
 						</f:content>
@@ -65,7 +57,7 @@
 							</items>
 						</SegmentedButton>
 						<ToolbarSpacer />
-						<Button id="clearCompleted-footer" enabled="{/itemsRemovable}" icon="sap-icon://delete" text="{i18n>CLEAR_COMPLETED}" press=".clearCompleted"/>
+						<Button id="clearCompleted-footer" enabled="true" icon="sap-icon://delete" text="{i18n>CLEAR_COMPLETED}" press="clearCompleted"/>
 					</OverflowToolbar>
 				</footer>
 

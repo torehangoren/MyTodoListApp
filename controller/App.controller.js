@@ -39,7 +39,7 @@ sap.ui.define([
 					aResult.result.forEach(function (oResult) {
 						oResult.ID = parseInt(oResult.ID, 10);
 						oResult.TOPIC_ID = parseInt(oResult.TOPIC_ID, 10);
-						
+
 						if (oResult.COMPLETED === "1") {
 							oResult.COMPLETED = true;
 							aCompletedItems.push(oResult);
@@ -50,10 +50,11 @@ sap.ui.define([
 
 					});
 
-					oJSONModel.setData(aResult);
+					oJSONModel.setData(aResult.result);
 					oCompletedModel.setData(aCompletedItems);
 					oActiveModel.setData(aActiveItems);
-					this.getView().setModel(oJSONModel);
+					this.getOwnerComponent().setModel(oJSONModel, "shown");
+					this.getView().setModel(oJSONModel, "shown");
 					this.getView().setModel(oJSONModel, "all");
 					this.getView().setModel(oActiveModel, "active");
 					this.getView().setModel(oCompletedModel, "completed");
@@ -65,7 +66,7 @@ sap.ui.define([
 		},
 		onAddNewTodo: function (oEvent) {
 
-			var aData = this.getView().getModel().getData().result;
+			var aData = this.getView().getModel().getData();
 			var iID = 0;
 			var aLastItem = [];
 
@@ -92,7 +93,7 @@ sap.ui.define([
 			});
 		},
 		clearCompleted: function (oEvent) {
-			var aData = this.getView().getModel().getData().result;
+			var aData = this.getView().getModel("shown").getData();
 			aData.forEach(function (oItem) {
 				if (oItem.COMPLETED) {
 					$.ajax({
@@ -112,13 +113,29 @@ sap.ui.define([
 
 		},
 		onCbCompleted: function (oEvent) {
-			var aSelectedLine = oEvent.getSource().getBindingContext().getObject();
+			var iID = null;
+			var iTOPIC_ID = null;
+			var sCompleted = "0";
+			this.getView().getModel("shown").getData().forEach(function (oItem) {
+				if (parseInt(oEvent.getSource().getProperty("name"), 10) === oItem.ID) {
+					iID = oItem.ID;
+					iTOPIC_ID = oItem.TOPIC_ID;
+					return;
+				}
+			});
 
+			if (!iTOPIC_ID) {
+				return;
+			}
+
+			if (oEvent.getSource().getProperty("selected")) {
+				sCompleted = "1";
+			}
 			$.ajax({
 				url: 'updateItem.php',
 				type: "POST",
 				async: false,
-				data: { id: aSelectedLine.ID, topic_id: aSelectedLine.TOPIC_ID, completed: aSelectedLine.COMPLETED },
+				data: { id: iID, topic_id: iTOPIC_ID, completed: sCompleted },
 				success: function (data) {
 					this._getItems();
 				}.bind(this),
@@ -142,8 +159,8 @@ sap.ui.define([
 		},
 		onFilter: function (oEvent) {
 			var sSelKey = oEvent.getSource().getProperty("selectedKey");
-			
-			this.getView().setModel(this.getView().getModel(sSelKey));
+
+			this.getView().setModel(this.getView().getModel(sSelKey), "shown");
 
 		}
 
