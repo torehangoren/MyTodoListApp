@@ -25,7 +25,11 @@ sap.ui.define([
 
 		_getItems() {
 			var oJSONModel = new sap.ui.model.json.JSONModel();
+			var oCompletedModel = new sap.ui.model.json.JSONModel();
+			var oActiveModel = new sap.ui.model.json.JSONModel();
 			var aResult = [];
+			var aCompletedItems = [];
+			var aActiveItems = [];
 
 			$.ajax({
 				url: 'getItems.php',
@@ -33,17 +37,26 @@ sap.ui.define([
 				success: function (data) {
 					aResult = JSON.parse(data);
 					aResult.result.forEach(function (oResult) {
-						if (oResult.COMPLETED === "1") {
-							oResult.COMPLETED = true;
-						} else {
-							oResult.COMPLETED = false;
-						}
 						oResult.ID = parseInt(oResult.ID, 10);
 						oResult.TOPIC_ID = parseInt(oResult.TOPIC_ID, 10);
+						
+						if (oResult.COMPLETED === "1") {
+							oResult.COMPLETED = true;
+							aCompletedItems.push(oResult);
+						} else {
+							oResult.COMPLETED = false;
+							aActiveItems.push(oResult);
+						}
+
 					});
 
 					oJSONModel.setData(aResult);
+					oCompletedModel.setData(aCompletedItems);
+					oActiveModel.setData(aActiveItems);
 					this.getView().setModel(oJSONModel);
+					this.getView().setModel(oJSONModel, "all");
+					this.getView().setModel(oActiveModel, "active");
+					this.getView().setModel(oCompletedModel, "completed");
 				}.bind(this),
 				error: function (err) {
 					console.log(err);
@@ -79,7 +92,7 @@ sap.ui.define([
 			});
 		},
 		clearCompleted: function (oEvent) {
-		var aData = this.getView().getModel().getData().result;
+			var aData = this.getView().getModel().getData().result;
 			aData.forEach(function (oItem) {
 				if (oItem.COMPLETED) {
 					$.ajax({
@@ -127,8 +140,11 @@ sap.ui.define([
 				return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 			});
 		},
-		onFilter: function (oEvent){
-			debugger;
+		onFilter: function (oEvent) {
+			var sSelKey = oEvent.getSource().getProperty("selectedKey");
+			
+			this.getView().setModel(this.getView().getModel(sSelKey));
+
 		}
 
 
