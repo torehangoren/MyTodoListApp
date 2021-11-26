@@ -39,6 +39,7 @@ sap.ui.define([
 							oResult.COMPLETED = false;
 						}
 						oResult.ID = parseInt(oResult.ID, 10);
+						oResult.TOPIC_ID = parseInt(oResult.TOPIC_ID, 10);
 					});
 
 					oJSONModel.setData(aResult);
@@ -56,7 +57,7 @@ sap.ui.define([
 			var aLastItem = [];
 
 			if (aData.length > 0) {
-				aLastItem = this.sortByAttribue(aData, "ID");
+				aLastItem = this.arraySort(aData, "ID");
 				iID += aLastItem[0].ID;
 			} else {
 				iID = 1;
@@ -78,13 +79,14 @@ sap.ui.define([
 			});
 		},
 		clearCompleted: function (oEvent) {
+		var aData = this.getView().getModel().getData().result;
 			aData.forEach(function (oItem) {
 				if (oItem.COMPLETED) {
 					$.ajax({
 						url: 'deleteItem.php',
 						type: "POST",
 						async: false,
-						data: { text: oItem.TEXT, completed: "0", topic_id: oItem.TOPIC_ID, id: oItem.ID },
+						data: { id: oItem.ID, topic_id: oItem.TOPIC_ID },
 						success: function (data) {
 							this._getItems();
 						}.bind(this),
@@ -105,10 +107,11 @@ sap.ui.define([
 				}
 			});
 		},
-		sortByAttribue: function(arr, attribute){
-			return arr.sort(function(a,b) { 
-				return a[attribute] < b[attribute];
-			  });
+		arraySort: function (aData, att) {
+			return aData.sort(function (a, b) {
+				var y = a[att]; var x = b[att];
+				return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+			});
 		}
 
 
