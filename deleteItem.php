@@ -1,6 +1,5 @@
 <?php
-$text1 = isset($_POST["text"]) ? $_POST["text"] : '';
-$completed1 = isset($_POST["completed"]) ? $_POST["completed"] : '';
+$id1 = isset($_POST["id"]) ? $_POST["id"] : '';
 $topic_id1 =isset($_POST["topic_id"]) ? $_POST["topic_id"] : '';
 
 
@@ -17,7 +16,7 @@ if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "DELETE FROM todolist WHERE text='$text1' and completed='$completed1' and topic_id='$topic_id1'";
+$sql = "DELETE FROM todolist WHERE id='$id1' and topic_id='$topic_id1'";
 
 if (mysqli_query($conn, $sql)) {
   echo "New record created successfully";

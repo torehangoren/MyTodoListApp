@@ -24,7 +24,7 @@ if(mysqli_num_rows($result) < 0)   // checking if there is any row in the result
  $res = array();
 while($row = mysqli_fetch_array($result)){
  array_push($res, 
- array('TEXT'=>$row[0],'COMPLETED'=>$row[1],'TOPIC_ID'=>$row[2]));
+ array('TEXT'=>$row[0],'COMPLETED'=>$row[1],'TOPIC_ID'=>$row[2],'ID'=>$row[3]));
  }
 
 
