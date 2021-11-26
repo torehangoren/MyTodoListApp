@@ -38,6 +38,7 @@ sap.ui.define([
 						} else {
 							oResult.COMPLETED = false;
 						}
+						oResult.ID = parseInt(oResult.ID, 10);
 					});
 
 					oJSONModel.setData(aResult);
@@ -56,7 +57,7 @@ sap.ui.define([
 
 			if (aData.length > 0) {
 				aLastItem = this.sortByAttribue(aData, "ID");
-				iID = aLastItem.ID;
+				iID += aLastItem.ID;
 			} else {
 				iID = 1;
 			}
