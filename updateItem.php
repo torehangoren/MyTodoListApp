@@ -17,7 +17,7 @@ if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "UPDATE todolist SET `COMPLETED`='$completed1' WHERE id='$id1' and topic_id='$topic_id1'";
+$sql = "UPDATE todolist SET COMPLETED='$completed1' WHERE id='$id1' and topic_id='$topic_id1'";
 
 if (mysqli_query($conn, $sql)) {
   echo "New record created successfully";
