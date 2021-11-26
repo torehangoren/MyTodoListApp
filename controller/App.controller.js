@@ -58,7 +58,7 @@ sap.ui.define([
 
 			if (aData.length > 0) {
 				aLastItem = this.arraySort(aData, "ID");
-				iID += aLastItem[0].ID;
+				iID += aLastItem[0].ID + 1;
 			} else {
 				iID = 1;
 			}
