@@ -57,7 +57,7 @@ sap.ui.define([
 			var aLastItem = [];
 
 			if (aData.length > 0) {
-				aLastItem = this.arraySort(aData, "ID");
+				aLastItem = this._arraySort(aData, "ID");
 				iID += aLastItem[0].ID + 1;
 			} else {
 				iID = 1;
@@ -101,17 +101,34 @@ sap.ui.define([
 		onCbCompleted: function (oEvent) {
 			var aSelectedLine = oEvent.getSource().getBindingContext().getObject();
 
-			this.getView().getModel().getData().result.forEach(function (oItem) {
-				if (aSelectedLine.TEXT === oItem.TEXT && aSelectedLine.TOPIC_ID === oItem.TOPIC_ID) {
-					oItem === aSelectedLine;
+			$.ajax({
+				url: 'updateItem.php',
+				type: "POST",
+				async: false,
+				data: { id: aSelectedLine.ID, topic_id: aSelectedLine.TOPIC_ID, completed: aSelectedLine.COMPLETED },
+				success: function (data) {
+					this._getItems();
+				}.bind(this),
+				error: function (err) {
+					console.log(err);
 				}
 			});
+
+
+			// this.getView().getModel().getData().result.forEach(function (oItem) {
+			// 	if (aSelectedLine.ID === oItem.ID && aSelectedLine.TOPIC_ID === oItem.TOPIC_ID) {
+			// 		oItem === aSelectedLine;
+			// 	}
+			// });
 		},
-		arraySort: function (aData, att) {
+		_arraySort: function (aData, att) {
 			return aData.sort(function (a, b) {
 				var y = a[att]; var x = b[att];
 				return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 			});
+		},
+		onFilter: function (oEvent){
+			debugger;
 		}
 
 
