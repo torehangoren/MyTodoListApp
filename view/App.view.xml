@@ -7,8 +7,8 @@
 			<content>
 				<VBox fitContainer="true" justifyContent="Center" alignItems="Center" alignContent="Center">
 					<items>
-						<Input id="uid" placeholder="{i18n>INPUT_USER}"></Input>
-						<Input id="pasw" placeholder="{i18n>INPUT_PASSWORD}" type="Password"></Input>
+						<Input id="uid" placeholder="{i18n>INPUT_USER}" submit="onLoginTap"></Input>
+						<Input id="pasw" placeholder="{i18n>INPUT_PASSWORD}" type="Password" submit="onLoginTap"></Input>
 						<Button width="12rem" text="{i18n>SUBMIT_USER}" type="Emphasized" press="onLoginTap"></Button>
 					</items>
 				</VBox>
