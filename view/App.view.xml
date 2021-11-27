@@ -1,66 +1,25 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:f="sap.f" controllerName="goto.todo.controller.App" displayBlock="true">
-		<App>
-			<Page title="{i18n>TITLE}">
-				<content>
-					<f:DynamicPage>
-						<f:header>
-							<f:DynamicPageHeader pinnable="false">
-								<Input class="todoInput" id="addTodoItemInput" placeholder="{i18n>INPUT_PLACEHOLDER}" submit="onAddNewTodo"/>
-							</f:DynamicPageHeader>
-						</f:header>
-						<f:content>
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:f="sap.f" controllerName="goto.todo.controller.App" displayBlock="true">
+	<App id="app">
+		<Page title="{i18n>TITLE_LOGIN}">
+			<content>
+				<VBox fitContainer="true" justifyContent="Center" alignItems="Center" alignContent="Center">
+					<items>
+						<Input id="uid" placeholder="{i18n>INPUT_USER}"></Input>
+						<Input id="pasw" placeholder="{i18n>INPUT_PASSWORD}" type="Password"></Input>
+						<Button width="12rem" text="{i18n>SUBMIT_USER}" type="Emphasized" press="onLoginTap"></Button>
+					</items>
+				</VBox>
+			</content>
 
-							<List id="todoList"
-								items="{ path: 'shown>/' }"
-								mode="None"
-								growing="true"
-								growingScrollToLoad="true"
-								showNoData="false">
-								<headerToolbar>
-									<OverflowToolbar class="sapUiSizeCompact" visible="{= !${view>/isMobile} }">
-										<ToolbarSpacer />
-										<SegmentedButton selectedKey="all" selectionChange="onFilter" class="sapMSegmentedButtonNoAutoWidth">
-											<items>
-												<SegmentedButtonItem text="{i18n>LABEL_ALL}" key="all"/>
-												<SegmentedButtonItem text="{i18n>LABEL_ACTIVE}" key="active"/>
-												<SegmentedButtonItem text="{i18n>LABEL_COMPLETED}" key="completed"/>
-											</items>
-										</SegmentedButton>
-										<Button id="clearCompleted" enabled="true" icon="sap-icon://delete" text="{i18n>CLEAR_COMPLETED}" 											press=".clearCompleted"/>
-									</OverflowToolbar>
-								</headerToolbar>
-								<CustomListItem>
-									<HBox>
-										<CheckBox selected="{shown>COMPLETED}"  valueState="{= ${shown>COMPLETED} ? 'Success' : 'None'}" 							select="onCbCompleted" name="{shown>ID}"/>
-										<VBox justifyContent="Center">
-											<Text text="{shown>TEXT}"/>
-										</VBox>
-									</HBox>
-									<customData>
-										<core:CustomData key="todo-item-completed" value="{= String(${shown>COMPLETED})}" writeToDom="true" />
-									</customData>
-								</CustomListItem>
-				
-							</List>
-
-						</f:content>
-					</f:DynamicPage>
-				</content>
-
-				<footer>
-					<OverflowToolbar visible="{= !!${view>/isMobile} }">
-						<SegmentedButton selectedKey="all" selectionChange="onFilter" class="sapMSegmentedButtonNoAutoWidth">
-							<items>
-								<SegmentedButtonItem text="All" key="all"/>
-								<SegmentedButtonItem text="Active" key="active"/>
-								<SegmentedButtonItem text="Completed" key="completed"/>
-							</items>
-						</SegmentedButton>
-						<ToolbarSpacer />
-						<Button id="clearCompleted-footer" enabled="true" icon="sap-icon://delete" text="{i18n>CLEAR_COMPLETED}" press="clearCompleted"/>
-					</OverflowToolbar>
-				</footer>
-
-			</Page>
-		</App>
+			<footer>
+				<OverflowToolbar id="otbFooter">
+					<ToolbarSpacer/>
+						<Button text="{i18n>MAIN_FOOTER_HINT}"/>
+				</OverflowToolbar>
+			</footer>
+		</Page>
+	</App>
 </mvc:View>
