@@ -66,7 +66,7 @@ sap.ui.define([
 		},
 		onAddNewTodo: function (oEvent) {
 
-			var aData = this.getView().getModel().getData();
+			var aData = this.getView().getModel("all").getData();
 			var iID = 0;
 			var aLastItem = [];
 
