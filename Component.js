@@ -12,3 +12,4 @@ sap.ui.define(["sap/ui/core/UIComponent", "sap/ui/core/ComponentSupport"], funct
 		}
 	});
 });
+ 
