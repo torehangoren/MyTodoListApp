@@ -4,7 +4,8 @@ jQuery.sap.require("goto.todo.libs.md5");
 
 sap.ui.define([
 	"sap/ui/Device",
-	"sap/ui/core/mvc/Controller"
+	"sap/ui/core/mvc/Controller",
+	"sap/m/MessageBox"
 ], function (Device, Controller) {
 	"use strict";
 
@@ -21,7 +22,7 @@ sap.ui.define([
 			var sInputUser = this.getView().byId("uid").getValue();
 			var sInputPass = this.getView().byId("pasw").getValue();
 			var oJSONModel = new sap.ui.model.json.JSONModel();
-			aResult = [];
+			var aResult = [];
 
 			$.ajax({
 				url: 'loginAuth.php',
@@ -30,8 +31,10 @@ sap.ui.define([
 				data: { user: sInputUser, pass: CryptoJS.MD5(sInputPass).toString() },
 				success: function (data) {
 					aResult = JSON.parse(data);
-					if (aResult.result[0].ROUTE) {
+					if (aResult.result.length > 0) {
 						oRouter.navTo(aResult.result[0].ROUTE);
+					} else {
+						MessageBox.error("Hatalı Kullanıcı adı veya Şifre!");
 					}
 				}.bind(this),
 				error: function (err) {
