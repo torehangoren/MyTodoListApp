@@ -66,11 +66,11 @@ sap.ui.define([
 
 					//set the current tab again
 					if (this.getView().getModel("view").getData().isMobile) {
-						this.sTABKEY = this.getView().byId(this.cMobile_SEGMENT_ID).setSelectedKey(this.sTABKEY);
+						this.getView().byId(this.cMobile_SEGMENT_ID).setSelectedKey(this.sTABKEY);
 					} else {
-						this.sTABKEY = this.getView().byId(this.cPC_SEGMENT_ID).setSelectedKey(this.sTABKEY);
+						this.getView().byId(this.cPC_SEGMENT_ID).setSelectedKey(this.sTABKEY);
 					}
-					this.getView().setModel(this.getView().getModel(this.sTABKEY), "shown");	
+					this.getView().setModel(this.getView().getModel(this.sTABKEY), "shown");
 				}.bind(this),
 				error: function (err) {
 					console.log(err);
