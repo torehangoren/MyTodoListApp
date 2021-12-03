@@ -141,9 +141,9 @@ sap.ui.define([
 			}
 
 			if (this.getView().getModel("view").getData().isMobile) {
-				this.sTABKEY = this.getView().byId(cMobile_SEGMENT_ID).getProperty("selectedKey");
+				this.sTABKEY = this.getView().byId(this.cMobile_SEGMENT_ID).getProperty("selectedKey");
 			} else {
-				this.sTABKEY = this.getView().byId(cPC_SEGMENT_ID).getProperty("selectedKey");
+				this.sTABKEY = this.getView().byId(this.cPC_SEGMENT_ID).getProperty("selectedKey");
 			}
 
 			$.ajax({
