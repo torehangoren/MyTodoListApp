@@ -11,6 +11,11 @@ sap.ui.define([
 
 		//CONSTANTS
 		cTOPIC_ID: 1,
+		cPC_SEGMENT_ID: "SBFilterTabsPCID",
+		cMobile_SEGMENT_ID: "SBFilterTabsMobileID",
+
+		//GLOBALE VARIABLES
+		sTABKEY: "all",
 
 		onInit: function () {
 
@@ -23,7 +28,7 @@ sap.ui.define([
 
 		},
 
-		_getItems() {
+		_getItems: function () {
 			var oJSONModel = new sap.ui.model.json.JSONModel();
 			var oCompletedModel = new sap.ui.model.json.JSONModel();
 			var oActiveModel = new sap.ui.model.json.JSONModel();
@@ -58,6 +63,9 @@ sap.ui.define([
 					this.getView().setModel(oJSONModel, "all");
 					this.getView().setModel(oActiveModel, "active");
 					this.getView().setModel(oCompletedModel, "completed");
+
+					//set the current tab again
+					this.getView().byId("SBFilterTabsID").setSelectedKey(this.sTABKEY);
 				}.bind(this),
 				error: function (err) {
 					console.log(err);
@@ -131,6 +139,13 @@ sap.ui.define([
 			if (oEvent.getSource().getProperty("selected")) {
 				sCompleted = "1";
 			}
+
+			if (this.getView().getModel("view").getData().isMobile) {
+				this.sTABKEY = this.getView().byId(cMobile_SEGMENT_ID).getProperty("selectedKey");
+			} else {
+				this.sTABKEY = this.getView().byId(cPC_SEGMENT_ID).getProperty("selectedKey");
+			}
+
 			$.ajax({
 				url: 'updateItem.php',
 				type: "POST",
@@ -145,11 +160,6 @@ sap.ui.define([
 			});
 
 
-			// this.getView().getModel().getData().result.forEach(function (oItem) {
-			// 	if (aSelectedLine.ID === oItem.ID && aSelectedLine.TOPIC_ID === oItem.TOPIC_ID) {
-			// 		oItem === aSelectedLine;
-			// 	}
-			// });
 		},
 		_arraySort: function (aData, att) {
 			return aData.sort(function (a, b) {
@@ -158,9 +168,8 @@ sap.ui.define([
 			});
 		},
 		onFilter: function (oEvent) {
-			var sSelKey = oEvent.getSource().getProperty("selectedKey");
-
-			this.getView().setModel(this.getView().getModel(sSelKey), "shown");
+			this.sTABKEY = oEvent.getSource().getProperty("selectedKey");
+			this.getView().setModel(this.getView().getModel(this.sTABKEY), "shown");
 
 		}
 

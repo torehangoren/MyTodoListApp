@@ -17,7 +17,7 @@
 							<headerToolbar>
 								<OverflowToolbar class="sapUiSizeCompact" visible="{= !${view>/isMobile} }">
 									<ToolbarSpacer />
-									<SegmentedButton selectedKey="all" selectionChange="onFilter" class="sapMSegmentedButtonNoAutoWidth">
+									<SegmentedButton  id="SBFilterTabsPCID" selectionChange="onFilter" class="sapMSegmentedButtonNoAutoWidth">
 										<items>
 											<SegmentedButtonItem text="{i18n>LABEL_ALL}" key="all"/>
 											<SegmentedButtonItem text="{i18n>LABEL_ACTIVE}" key="active"/>
@@ -47,7 +47,7 @@
 
 			<footer>
 				<OverflowToolbar visible="{= !!${view>/isMobile} }">
-					<SegmentedButton selectedKey="all" selectionChange="onFilter" class="sapMSegmentedButtonNoAutoWidth">
+					<SegmentedButton id="SBFilterTabsMobileID" selectionChange="onFilter" class="sapMSegmentedButtonNoAutoWidth">
 						<items>
 							<SegmentedButtonItem text="{i18n>LABEL_ALL}" key="all"/>
 							<SegmentedButtonItem text="{i18n>LABEL_ACTIVE}" key="active"/>
