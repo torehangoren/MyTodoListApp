@@ -107,7 +107,7 @@ sap.ui.define([
 		},
 		clearCompleted: function (oEvent) {
 			var aData = this.getView().getModel("shown").getData();
-			aData.forEach(function (oItem) {
+			aData.forEach(function (oItem, idx) {
 				if (oItem.COMPLETED) {
 					$.ajax({
 						url: 'deleteItem.php',
@@ -115,13 +115,16 @@ sap.ui.define([
 						async: false,
 						data: { id: oItem.ID, topic_id: oItem.TOPIC_ID },
 						success: function (data) {
-							this._getItems();
+							if (idx === (aData.length - 1)) {
+								this._getItems();
+							}
 						}.bind(this),
 						error: function (err) {
 							console.log(err);
 						}
 					});
 				}
+
 			}.bind(this));
 
 		},
