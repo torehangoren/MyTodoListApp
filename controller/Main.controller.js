@@ -70,6 +70,7 @@ sap.ui.define([
 					} else {
 						this.sTABKEY = this.getView().byId(this.cPC_SEGMENT_ID).setSelectedKey(this.sTABKEY);
 					}
+					this.getView().setModel(this.getView().getModel(this.sTABKEY), "shown");	
 				}.bind(this),
 				error: function (err) {
 					console.log(err);
