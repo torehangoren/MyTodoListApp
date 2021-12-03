@@ -65,7 +65,11 @@ sap.ui.define([
 					this.getView().setModel(oCompletedModel, "completed");
 
 					//set the current tab again
-					this.getView().byId("SBFilterTabsID").setSelectedKey(this.sTABKEY);
+					if (this.getView().getModel("view").getData().isMobile) {
+						this.sTABKEY = this.getView().byId(this.cMobile_SEGMENT_ID).setSelectedKey(this.sTABKEY);
+					} else {
+						this.sTABKEY = this.getView().byId(this.cPC_SEGMENT_ID).setSelectedKey(this.sTABKEY);
+					}
 				}.bind(this),
 				error: function (err) {
 					console.log(err);
