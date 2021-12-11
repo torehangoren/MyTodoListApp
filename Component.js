@@ -10,6 +10,6 @@ sap.ui.define(["sap/ui/core/UIComponent", "sap/ui/core/ComponentSupport"], funct
 			// create the views based on the url/hash
 			this.getRouter().initialize();
 		}
-	});
+	}); 
 }); 
  
